@@ -2,15 +2,18 @@ function renderDSSV(svArr) {
   var contentHTML = "";
   for (var i = 0; i < svArr.length; i++) {
     var sv = svArr[i];
-    // console.log("sv", sv);
     var contentTr = `<tr>
         <td>${sv.ma}</td>
          <td>${sv.ten}</td>
           <td>${sv.email}</td> 
-          <td>0</td>
+          <td>${sv.tinhDTB()}</td>
           <td>
-           <button onclick="xoaSv('${sv.ma}')" class="btn btn-danger" >Xóa</button>
-           <button onclick="suaSv('${sv.ma}')" class="btn btn-danger" >Sửa</button>
+           <button onclick="xoaSv('${
+             sv.ma
+           }')" class="btn btn-danger" >Xóa</button>
+           <button onclick="suaSv('${
+             sv.ma
+           }')" class="btn btn-danger" >Sửa</button>
            </td>
         </tr>`;
     contentHTML = contentHTML + contentTr;
@@ -28,20 +31,7 @@ function layThongTinTuForm() {
   var ly = document.getElementById("txtDiemLy").value * 1;
   var hoa = document.getElementById("txtDiemHoa").value * 1;
 
-  var sv = {
-    ma: ma,
-    ten: ten,
-    email: email,
-    matKhau: matKhau,
-    toan: toan,
-    ly: ly,
-    hoa: hoa,
-    tinhDTB: function () {
-      return (this.toan + this.ly + this.hoa) / 3;
-    },
-  };
-
-  // console.log("sv", sv);
+  var sv = new SinhVien(ma, ten, email, matKhau, toan, ly, hoa);
   return sv;
 }
 
